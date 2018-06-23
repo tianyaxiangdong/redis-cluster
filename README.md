@@ -153,6 +153,20 @@ docker exec rediscluster_sentinel_1 redis-cli -p 26379 SENTINEL get-master-addr-
 [3]: https://docs.docker.com/compose/
 [4]: https://www.docker.com
 
+## Developer use
+
+check your redis container ips
+```
+docker inspect -f='{{.Name}} {{.NetworkSettings.IPAddress}} {{.HostConfig.PortBindings}}' $(docker ps -aq)
+```
+proxy ports in development
+
+```
+iptables -t nat -A  DOCKER -p tcp --dport 26379 -j DNAT --to-destination 172.17.0.4:26379
+iptables -t nat -A  DOCKER -p tcp --dport 26380 -j DNAT --to-destination 172.17.0.5:26379
+```
+enjoy it
+
 ## License
 
 Apache 2.0 license 
