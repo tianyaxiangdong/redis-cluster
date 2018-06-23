@@ -164,6 +164,8 @@ proxy ports in development
 ```
 iptables -t nat -A  DOCKER -p tcp --dport 26379 -j DNAT --to-destination 172.17.0.4:26379
 iptables -t nat -A  DOCKER -p tcp --dport 26380 -j DNAT --to-destination 172.17.0.5:26379
+
+iptables -P FORWARD ACCEPT  
 ```
 enjoy it
 
